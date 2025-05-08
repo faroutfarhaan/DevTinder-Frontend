@@ -1,9 +1,12 @@
 import React from 'react';
 import Logo from './Logo'; // adjust the path if needed
 import { useNavigate } from 'react-router';
+import { useSelector } from 'react-redux';
 
 const Navbar = () => {
   const navigate=useNavigate();
+  const user = useSelector((state) => state.user);
+  console.table([user, "newone"]);
   return (
     <div>
       <div className="navbar bg-[#111111] text-white shadow-sm">
