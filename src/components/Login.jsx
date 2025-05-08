@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { addUser } from '../utils/userSlice';
 
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -19,7 +20,7 @@ const Login = () => {
         password
       }, { withCredentials: true });
       console.log(res.data);
-      dispatch(addUser(res.data.user));
+      dispatch(addUser(res.data));
       return navigate("/");
 
     } catch (err) {
@@ -29,6 +30,7 @@ const Login = () => {
   }
 
   return (
+    
     <div className="flex justify-center items-center  bg-[#111111] h-screen">
       <div className="card card-border bg-gradient-to-r from-[#3B82F6] to-[#9333EA] w-full sm:w-96 md:w-96 lg:w-96 xl:w-96 p-6 rounded-xl shadow-lg max-w-xs">
         <div className="card-body text-white">
@@ -100,6 +102,7 @@ const Login = () => {
         </div>
       </div>
     </div>
+    
   )
 }
 
