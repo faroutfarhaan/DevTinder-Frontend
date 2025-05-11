@@ -1,9 +1,11 @@
 import React from 'react';
 import Logo from './Logo'; // adjust the path if needed
 import { useNavigate } from 'react-router';
+import { useSelector } from 'react-redux';
 
 const Navbar = () => {
   const navigate=useNavigate();
+  const user=useSelector((store)=>store.user);
   return (
     <div>
       <div className="navbar bg-[#111111] text-white shadow-sm">
@@ -13,7 +15,7 @@ const Navbar = () => {
             <span className="hidden sm:inline">DevTinder</span>
           </a>
         </div>
-        <div className="flex gap-2">
+       { user && (<div className="flex gap-2">
           <div className="dropdown dropdown-end">
             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar hover:bg-[#FF416C] transition">
               <div className="w-10 rounded-full">
@@ -33,7 +35,7 @@ const Navbar = () => {
               <li><a className="hover:text-[#FF416C]">Logout</a></li>
             </ul>
           </div>
-        </div>
+        </div>)}
       </div>
     </div>
   );

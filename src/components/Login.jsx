@@ -13,7 +13,7 @@ const Login = () => {
   const [lastName,setLastName]=useState();
   const [age,setAge]=useState();
   const [phone,setPhone]=useState();
-  const [isLogin,setIsLogin]=useState(false);
+  const [isLogin,setIsLogin]=useState(true);
   const [error, setError] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
