@@ -25,7 +25,7 @@ const Navbar = () => {
     <div>
       <div className="navbar bg-[#111111] text-[#FF416C] shadow-sm">
         <div className="flex-1">
-          <Link className="  normal-case text-xl flex justify-items-center gap-2" >
+          <Link to='/' className="  normal-case text-xl flex justify-items-center gap-2" >
             <Logo />
             <span className="hidden font-semibold sm:inline">DevTinder</span>
          </Link>
@@ -47,7 +47,8 @@ const Navbar = () => {
               <li>
                 <Link to='/profile' className="justify-between hover:text-[#FF416C]">Profile</Link>
               </li>
-              <li><Link  className="hover:text-[#FF416C]">Settings</Link></li>
+              <li><Link to='/connections'  className="hover:text-[#FF416C]">Connections</Link></li>
+              <li><Link to='/requests'  className="hover:text-[#FF416C]">Requests</Link></li>
               <li><a onClick={handleLogout} className="hover:text-[#FF416C]">Logout</a></li>
             </ul>
           </div>

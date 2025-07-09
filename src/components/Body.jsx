@@ -27,13 +27,15 @@ const Body = () => {
     useEffect(
       ()=>{
       fetchUser()
-    },[]);
+    },[] );
   return (
 
-    <div>
+    <div className='h-screen flex flex-col '>
         <Navbar/>
+        <div className='flex-grow'>
         <Outlet/>
-        <Footer/>
+          </div>
+          <Footer/>
     </div>
   );
 };

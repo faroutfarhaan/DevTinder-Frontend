@@ -11,7 +11,7 @@ const Footer = () => {
           <p className="text-lg sm:text-xl font-semibold">
             DevTinder Pvt Ltd.
             <br />
-            Connecting developers worldwide.
+            <span className='font-light'>Connecting developers worldwide.</span>
           </p>
         </aside>
 

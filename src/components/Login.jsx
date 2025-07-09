@@ -44,9 +44,11 @@ const Login = () => {
             password
 
           },{withCredentials:true});
+          
           if(res.status!=400){
             console.log(res);
           }
+          setIsLogin(true);
     }catch(err){
       setError(err.response.data);
            console.log(err);
