@@ -5,6 +5,9 @@ import { BASE_URL } from '../utils/constants';
 import { useEffect } from 'react';
 import { addConnections } from '../utils/connectionsSlice';
 import { Link } from 'react-router';
+import NoConnections from './NoConnections';
+
+import RequestShimmer from '../shimmers/RequestShimmer';
 
 const Connections = () => {
     const connections=useSelector((store)=>store.connections);
@@ -25,8 +28,8 @@ const Connections = () => {
             fetchConnections();
         }
     },[user]);
-   if(!connections) return <h1>Loading.......</h1> ;
-   if(connections.length===0) return <h1 className='justify-center  text-center m-7 '>No connections, Get some buddy!</h1>
+   if(!connections) return <RequestShimmer/> ;
+   if(connections.length===0) return <NoConnections/>
   return (<>
      
     <div className='flex justify-start items-center shadow-black shadow rounded-4xl w-max text-4xl text-[#FF416C] font-bold m-5 p-4 '>Connections</div>

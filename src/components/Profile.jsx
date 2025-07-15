@@ -9,12 +9,34 @@ const Profile = () => {
   const dispatch = useDispatch();
   
   const [isEditing, setIsEditing] = useState(false);
-  const [firstName, setFirstName] = useState(user?.firstName || '');
-  const [lastName, setLastName] = useState(user?.lastName || '');
-  const [age, setAge] = useState(user?.age || '');
-  const [about, setAbout] = useState(user?.about || '');
-  const [photoUrl, setPhotoUrl] = useState(user?.photoUrl || '');
+ const [firstName, setFirstName] = useState(null);
+const [lastName, setLastName] = useState(null);
+const [age, setAge] = useState(null);
+const [about, setAbout] = useState(null);
+const [photoUrl, setPhotoUrl] = useState(null);
+const [gender, setGender] = useState(null);
+
   const [showToast,setShowToast]=useState(false);
+  const handleEdit = () => {
+  setFirstName(user.firstName || "");
+  setLastName(user.lastName || "");
+  setAge(user.age || "");
+  setAbout(user.about || "");
+  setPhotoUrl(user.photoUrl || "");
+  setGender(user.gender || "");
+  setIsEditing(true);
+};
+const handleCancel = () => {
+  setIsEditing(false);
+  setFirstName(null);
+  setLastName(null);
+  setAge(null);
+  setAbout(null);
+  setPhotoUrl(null);
+  setGender(null);
+};
+
+
   const handleSave = async () => {
     try {
       const res = await axios.put(BASE_URL + "/profile/edit", {
@@ -22,7 +44,8 @@ const Profile = () => {
         lastName,
         age,
         about,
-        photoUrl
+        photoUrl,
+        gender: gender.toLowerCase()
       }, { withCredentials: true });
       
       dispatch(addUser(res.data?.data));
@@ -49,8 +72,8 @@ const Profile = () => {
           <h1 className="text-3xl font-bold text-[#FF416C]">Profile</h1>
           {!isEditing ? (
             <button
-              onClick={() => setIsEditing(true)}
-              className="btn bg-[#FF416C] hover:bg-[#FF4B2B] text-white px-6 py-2 rounded-lg"
+              onClick={handleEdit}
+              className="btn bg-[#FF416C] hover:bg-[#FF4B2B] text-white px-6 py-2 rounded-full"
             >
               Edit
             </button>
@@ -58,13 +81,13 @@ const Profile = () => {
             <div className="flex gap-3">
               <button
                 onClick={handleSave}
-                className="btn bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg"
+                className="btn bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-full"
               >
                 Save
               </button>
               <button
-                onClick={() => setIsEditing(false)}
-                className="btn bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg"
+                onClick={handleCancel}
+                className="btn bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-full"
               >
                 Cancel
               </button>
@@ -138,7 +161,20 @@ const Profile = () => {
                   <div className="p-3 bg-[#333333] rounded text-white">{user.age}</div>
                 )}
               </div>
-
+              {/*gender*/}
+               <div>
+                <label className="block text-white mb-2">Gender</label>
+                {isEditing ? (
+                  <input
+                    type="text"
+                    value={gender}
+                    onChange={(e) => setGender(e.target.value)}
+                    className="input bg-[#333333] text-white w-full"
+                  />
+                ) : (
+                  <div className="p-3 bg-[#333333] rounded text-white">{user.gender}</div>
+                )}
+              </div>
               {/* About */}
               <div>
                 <label className="block text-white mb-2">About</label>

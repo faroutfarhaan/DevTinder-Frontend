@@ -6,7 +6,9 @@ import { removeUser } from '../utils/userSlice';
 import { Link } from 'react-router-dom';
 import {BASE_URL} from '../utils/constants';
 import axios from 'axios';
-
+import { removeAllRequests } from '../utils/requestsSlice';
+import { removeFeed } from '../utils/feedSlice';
+import {removeConnections} from '../utils/connectionsSlice';
 const Navbar = () => {
   const navigate=useNavigate();
   const dispatch=useDispatch();
@@ -14,11 +16,18 @@ const Navbar = () => {
   const handleLogout= async ()=>{
     try{
       await axios.post(BASE_URL+"/logout",{},{withCredentials:true});
+      localStorage.removeItem('token');
       dispatch(removeUser());
+      dispatch(removeAllRequests());
+      dispatch(removeFeed());
+      dispatch(removeConnections());
       return navigate('/login');
     }
     catch(error){console.log(error);
     dispatch(removeUser());
+    dispatch(removeAllRequests());
+      dispatch(removeFeed());
+      dispatch(removeConnections());
       return navigate('/login');}
   }
   return (

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addfeed } from '../utils/feedSlice'
 import { useNavigate } from 'react-router-dom'
 import UserCard from './UserCard'
+import UserCardShimmer from '../shimmers/UserCardShimmer'
 
 const Feed = () => {
     const feed = useSelector((store) =>store.feed);
@@ -39,7 +40,7 @@ const Feed = () => {
     const feedArray=useSelector((store)=>store.feed?.feed) || [];
   return (
         
-    <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-white m-4 rounded-4xl flex'>
+    <div className=' text-white  rounded-4xl '>
 {
  
       feedArray.length > 0 ? (
@@ -47,7 +48,9 @@ const Feed = () => {
           <UserCard key={item.id} user={item} />
         ))
       ) : (
-        <h1>You are all caught up.</h1>
+        <div className='flex justify-center'>
+        <UserCardShimmer/>
+        </div>
       )
 }
      

@@ -13,6 +13,7 @@ const Login = () => {
   const [lastName,setLastName]=useState();
   const [age,setAge]=useState();
   const [phone,setPhone]=useState();
+  const [gender,setGender]=useState();
   const [isLogin,setIsLogin]=useState(true);
   const [error, setError] = useState("");
   const dispatch = useDispatch();
@@ -41,7 +42,8 @@ const Login = () => {
             age,
             phone,
             email,
-            password
+            password,
+            gender: gender.toLowerCase()
 
           },{withCredentials:true});
           
@@ -117,7 +119,7 @@ const Login = () => {
               className="bg-transparent text-white w-full p-3"
             />
           </label>
-          <label className="input bg-[#333333] text-white rounded-md mb-6 w-full">
+   <label className="input bg-[#333333] text-white rounded-md mb-6 w-full">
   <svg
     className="h-[1em] opacity-50"
     xmlns="http://www.w3.org/2000/svg"
@@ -141,7 +143,35 @@ const Login = () => {
     max="100"
     className="bg-transparent text-white w-full p-3"
   />
-          </label>
+  </label>
+ <label className="input bg-[#333333] text-white rounded-md mb-6 w-full">
+  <svg
+    className="h-[1em] opacity-50"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <circle cx="12" cy="8" r="4" />
+    <path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" />
+  </svg>
+  <select
+    required
+    value={gender}
+    onChange={(e) => setGender(e.target.value)}
+    className="bg-transparent text-white w-full p-3"
+  >
+    <option value="" disabled>Select Gender</option>
+    <option value="male">Male</option>
+    <option value="female">Female</option>
+    <option value="others">Others</option>
+  </select>
+</label>
+
+
 
           
           <label className="input bg-[#333333] text-white rounded-md mb-6 w-full">
@@ -169,6 +199,9 @@ const Login = () => {
     className="bg-transparent text-white w-full p-3"
   />
           </label>
+
+
+  
 
            </>)}
          <> <label className="input bg-[#333333] text-white rounded-md mb-4 w-full">
