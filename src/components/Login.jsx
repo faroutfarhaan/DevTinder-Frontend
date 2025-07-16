@@ -9,11 +9,11 @@ import { addUser } from '../utils/userSlice';
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [firstName,setFirstName]=useState();
-  const [lastName,setLastName]=useState();
-  const [age,setAge]=useState();
-  const [phone,setPhone]=useState();
-  const [gender,setGender]=useState();
+  const [firstName,setFirstName]=useState("");
+  const [lastName,setLastName]=useState("");
+  const [age,setAge]=useState("");
+  const [phone,setPhone]=useState("");
+  const [gender,setGender]=useState("");
   const [isLogin,setIsLogin]=useState(true);
   const [error, setError] = useState("");
   const dispatch = useDispatch();
@@ -30,12 +30,25 @@ const Login = () => {
       return navigate("/");
 
     } catch (err) {
-      setError(err.response.data);
-      console.log(err);
+      console.error(err);
+  setError(
+    err.response?.data?.message || 
+    err.response?.data || 
+    "Login failed. Please try again."
+  );
     }
   }
   const handleSignup=async ()=>{
     try{
+      console.log("form values", {
+  firstName, lastName, age, phone, email, password, gender
+});
+
+      if (!firstName || !lastName || !email || !age || !phone || !password || !gender) {
+  setError("Please fill in all required fields.");
+  return;
+}
+
           const res=await axios.post(BASE_URL+"/signup",{
             firstName,
             lastName,
@@ -43,7 +56,7 @@ const Login = () => {
             phone,
             email,
             password,
-            gender: gender.toLowerCase()
+            gender: gender?.toLowerCase()
 
           },{withCredentials:true});
           
@@ -52,8 +65,12 @@ const Login = () => {
           }
           setIsLogin(true);
     }catch(err){
-      setError(err.response.data);
-           console.log(err);
+      console.error(err);
+    setError(
+      err.response?.data?.message || 
+      err.response?.data || 
+      "Signup failed. Please try again."
+    );
            
     }
   }

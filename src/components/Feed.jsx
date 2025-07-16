@@ -6,6 +6,7 @@ import { addfeed } from '../utils/feedSlice'
 import { useNavigate } from 'react-router-dom'
 import UserCard from './UserCard'
 import UserCardShimmer from '../shimmers/UserCardShimmer'
+import NoFeed from './NOFeed'
 
 const Feed = () => {
     const feed = useSelector((store) =>store.feed);
@@ -47,7 +48,10 @@ const Feed = () => {
         feedArray.map((item) => (
           <UserCard key={item.id} user={item} />
         ))
-      ) : (
+      ):feed?(
+        <NoFeed/>
+      )
+       : (
         <div className='flex justify-center'>
         <UserCardShimmer/>
         </div>

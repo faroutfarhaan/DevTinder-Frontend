@@ -1,18 +1,21 @@
 import React from 'react';
 import axios from 'axios';
 import { BASE_URL } from '../utils/constants';
+import { removeUserFromFeed } from '../utils/feedSlice';
+import { useDispatch } from 'react-redux';
 
-const UserCard = (item) => {
-  const { firstName, lastName, age, photoUrl, about, gender } = item.user;
-
+const UserCard = ({user}) => {
+  const { firstName, lastName, age, photoUrl, about, gender } = user;
+   const dispatch=useDispatch();
   const handleReq = async (status) => {
-    const id = item.user._id;
+    const id = user._id;
     try {
       const res = await axios.post(
         `${BASE_URL}/request/send/${status}/${id}`,
-        null,
+        {},
         { withCredentials: true }
       );
+      dispatch(removeUserFromFeed(id));
       console.log(res.data);
     } catch (err) {
       console.log(err);
@@ -46,7 +49,7 @@ const UserCard = (item) => {
             </button>
             <button
               className="btn px-6 py-2 bg-[#FF416C] text-white rounded-full hover:bg-white hover:text-[#FF416C] border border-[#FF416C] mx-2"
-              onClick={() => handleReq('ignore')}
+              onClick={() => handleReq('ignored')}
             >
               Ignore
             </button>
