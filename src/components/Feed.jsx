@@ -6,7 +6,7 @@ import { addfeed } from '../utils/feedSlice'
 import { useNavigate } from 'react-router-dom'
 import UserCard from './UserCard'
 import UserCardShimmer from '../shimmers/UserCardShimmer'
-import NoFeed from './NOFeed'
+import NoFeed from './NoFeed'
 
 const Feed = () => {
     const feed = useSelector((store) =>store.feed);
