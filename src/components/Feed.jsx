@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useEffect } from 'react'
+import React, { useEffect,useState } from 'react'
 import { BASE_URL } from '../utils/constants'
 import { useDispatch, useSelector } from 'react-redux'
 import { addfeed } from '../utils/feedSlice'
@@ -10,7 +10,7 @@ import NoFeed from './NoFeed'
 
 const Feed = () => {
     const feed = useSelector((store) =>store.feed);
-    
+    const [currentIndex,setCurrentIndex]=useState(0);
     const dispatch=useDispatch();
     const navigate=useNavigate();
     const user=useSelector((store)=>store.user);
@@ -38,19 +38,26 @@ const Feed = () => {
     },[user]);
    
       
-    const feedArray=useSelector((store)=>store.feed?.feed) || [];
+    const feedArray=feed?.feed || [];
+    const handleUserResponse = () => {
+    setCurrentIndex((prev) => prev + 1);
+  };
   return (
         
     <div className=' text-white  rounded-4xl '>
 {
  
-      feedArray.length > 0 ? (
-        feedArray.map((item) => (
-          <UserCard key={item.id} user={item} />
-        ))
-      ):feed?(
-        <NoFeed/>
-      )
+      feedArray.length  > 0 && currentIndex < feedArray.length ? (
+        
+          <UserCard key={feedArray[currentIndex].id}
+          user={feedArray[currentIndex]}
+          onRespond={handleUserResponse} />
+        
+      ): feed && feedArray.length === 0 ? (
+        <NoFeed />
+      ) : feed && currentIndex >= feedArray.length ? (
+        <NoFeed />
+      ) 
        : (
         <div className='flex justify-center'>
         <UserCardShimmer/>
