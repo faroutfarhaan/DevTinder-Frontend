@@ -37,18 +37,18 @@ const Connections = () => {
     <div>
         {connections.map((item)=>{
             const {
-                firstName, lastName ,age , photoUrl,  gender
+                firstName, lastName ,age , photoUrl,  gender,_id
             }=item;
             return(
                 
-                <div key={item._id} className='shadow-black shadow rounded-full flex p-2 m-4'>
-                  <figure className='w-50 justify-start items-center'><img src={photoUrl} alt='user photo' /></figure>
-                  <Link to='/display' state={item}><h2 className='text-[#FF416C] text-xl font-bold'>{firstName+" "+lastName}</h2>
+                <div key={item._id} className='shadow-black shadow rounded-full flex flex-row gap-4 p-2 my-4 mx-16'>
+                  <figure className='  rounded-full justify-start items-center'><img className=' w-20 h-20 rounded-full' src={photoUrl} alt='user photo' /></figure>
+                  <Link to='/display' state={item}><h2 className='text-[#FF416C] text-3xl font-bold'>{firstName+" "+lastName}</h2>
                   <p>{age+", "+gender}</p>
                   </Link>
                   
                   <div className='ml-auto flex items-center '>
-                  <button className='btn-primary btn justify-end mx-2 rounded-3xl'>remove</button>
+                  <Link to={"/chat/"+_id}><button className='btn-primary btn justify-end mx-2 rounded-3xl'>Chat</button></Link>
                     </div>
                     </div>
                     
